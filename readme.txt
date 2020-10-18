@@ -4,6 +4,7 @@ uboot-gblw210
 
 TODO: 
 时钟频率不对
+ddr时序不是最佳
 为什么board/samsung/gblw210/lowlevel_init.S中的ddr读写测试代码删除后无法启动
 
 
