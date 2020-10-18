@@ -8,6 +8,14 @@ $ ./flash_sd.sh /dev/sdb
 
 最后插入sd卡,短接启动模式跳线,启动
 
+SD卡数据分布:
+address     content     size(byte)  size(human-readable)
+0-1ff       mbr         512         512
+200-41ff    210.bin     16384	    16K
+4200-61ff   env         8192        8K        
+6200-3fffff u-boot.bin  4169216     3.97M       
+400000+     sd-data
+
 
 参考:
 https://www.bilibili.com/video/BV1s4411t7eT

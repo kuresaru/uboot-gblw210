@@ -1,8 +1,0 @@
-address     content     size(byte)  size(human-readable)
-
-0-1ff       mbr         512         512
-200-41ff    210.bin     16384	    16K
-4200-61ff   env         8192        8K        
-6200-3fffff u-boot.bin  4169216     3.97M       
-400000+     sd-data
-
