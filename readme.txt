@@ -2,7 +2,9 @@ uboot-gblw210
 给隔壁老王210移植的uboot
 
 
-TODO: 时钟频率不对
+TODO: 
+时钟频率不对
+为什么board/samsung/gblw210/lowlevel_init.S中的ddr读写测试代码删除后无法启动
 
 
 编译下载方法(注意修改make.sh中的进程数和写入sd的设备路径):

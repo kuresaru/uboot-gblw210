@@ -195,14 +195,10 @@ skip_check_didle:
 	/* for UART */
 	bl	uart_asm_init
 
-	// 打出cpuid
-	ldr r0, =0xE0000000
-	ldr r0, [r0]
-	bl test_print
-
 	bl  ddr_init
 
 	// 测试在DDR的256M+4B进行读写
+	// TODO 为什么删除了不能启动
 	ldr r0, =0x30000004
 	ldr r1, =0x12345678
 	str r1, [r0]
@@ -480,21 +476,6 @@ uart_asm_init:
 	ldr r1, =0xDFDD
 	str r1, [r0, #0x2C] @UDIVSLOT0=13'1
 
-	// send test
-	ldr r0, =0xE2900020
-	ldr r1, =0x55
-	str r1, [r0]
-	ldr r1, =0x61
-	str r1, [r0]
-	ldr r1, =0x72
-	str r1, [r0]
-	ldr r1, =0x74
-	str r1, [r0]
-	ldr r1, =0x0D
-	str r1, [r0]
-	ldr r1, =0x0A
-	str r1, [r0]
-
 200:
 	mov	pc, lr
 
@@ -712,18 +693,5 @@ find_lock_val:
 	// step28 memcontrol bl=4 1chip, ddr2 type, dynamic self refresh, force precharge, dynamic power down off
 	ldr r1, =0x00202400
 	str r1, [r0, #DMC_MEMCONTROL]
-
-	// print DDR
-	ldr r0, =0xE2900020
-	ldr r1, =0x44
-	str r1, [r0]
-	ldr r1, =0x44
-	str r1, [r0]
-	ldr r1, =0x52
-	str r1, [r0]
-	ldr r1, =0x0D
-	str r1, [r0]
-	ldr r1, =0x0A
-	str r1, [r0]
 
 	mov pc, lr
