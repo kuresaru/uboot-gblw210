@@ -1,12 +1,17 @@
 uboot-gblw210
 给隔壁老王210移植的uboot
 
+
+TODO: 时钟频率不对
+
+
 编译下载方法(注意修改make.sh中的进程数和写入sd的设备路径):
 $ make gblw210_config
 $ ./make.sh
 $ ./flash_sd.sh /dev/sdb
 
 最后插入sd卡,短接启动模式跳线,启动
+
 
 SD卡数据分布:
 address     content     size(byte)  size(human-readable)
@@ -15,6 +20,9 @@ address     content     size(byte)  size(human-readable)
 4200-61ff   env         8192        8K        
 6200-3fffff u-boot.bin  4169216     3.97M       
 400000+     sd-data
+
+
+mach type: 21986
 
 
 参考:

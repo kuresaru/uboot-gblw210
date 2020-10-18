@@ -32,7 +32,7 @@ u32 get_board_rev(void)
 int board_init(void)
 {
 	/* Set Initial global variables */
-	gd->bd->bi_arch_number = MACH_TYPE_GONI;
+	gd->bd->bi_arch_number = MACH_TYPE_GBLW210;
 	gd->bd->bi_boot_params = PHYS_SDRAM_1 + 0x100;
 
 	return 0;
