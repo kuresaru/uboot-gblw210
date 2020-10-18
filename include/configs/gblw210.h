@@ -148,6 +148,13 @@
 /* memtest works on */
 #define CONFIG_SYS_LOAD_ADDR		(CONFIG_SYS_SDRAM_BASE + 0x4000000)
 
+// dm9000 eth
+#define CONFIG_DRIVER_DM9000		1
+#define CONFIG_DM9000_BASE		0x80000000
+#define DM9000_IO			CONFIG_DM9000_BASE
+#define DM9000_DATA			(CONFIG_DM9000_BASE + 4)
+#define CONFIG_NET_RANDOM_ETHADDR // TODO for test
+
 // gblw210只有一个bank 有512M内存
 #define PHYS_SDRAM_1		CONFIG_SYS_SDRAM_BASE	/* OneDRAM Bank #0 */
 #define PHYS_SDRAM_1_SIZE	(512 << 20)		/* 512 MB in Bank #0 */

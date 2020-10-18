@@ -20,6 +20,7 @@
 #include <usb.h>
 #include <usb_mass_storage.h>
 #include <asm/mach-types.h>
+#include <netdev.h>
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -100,6 +101,40 @@ int board_mmc_init(struct bd_info *bis)
 	return ret;
 }
 #endif
+
+#ifdef CONFIG_DRIVER_DM9000
+int board_eth_init(struct bd_info *bis)
+{
+	unsigned int tmp;
+
+	// config dm9000 sromc
+	// HCLK MSYS = 200MHz 5ns
+	*((volatile unsigned int *)0xE8000004) =  // srom bc0
+		  (0 << 28)   // Adress set-up before nGCS
+											 // 发出片选信号之前,多长时间内要先发出地址信号
+											 // DM9000C的片选信号和CMD信号可以同时发出, 所以它设为0
+		  | (1 << 24) // Chip selection set-up before nOE
+											 // 发出片选信号之后,多长时间才能发出读信号nOE
+											 // >5ns
+		  | (5 << 16) // Access cycle
+											 // 读写信号的脉冲长度
+											 // >22ns
+		  | (1 << 12) // Chip selection hold on nOE
+											 // 当读信号nOE变为高电平后,片选信号还要维持多长时间
+											 // >5ns
+		  | (0 << 8) // Address holding time after nGCSn
+						// 当片选信号变为高电平后, 地址信号还要维持多长时间
+		  | (0 << 4) // Page mode access cycle @ Page mode
+		  | (0 << 0); // Page mode configuration
+
+	tmp = *((volatile unsigned int *)0xE8000000); // read srom bw
+	tmp &= ~0x0000000F; // 重置bank0设置
+	tmp |=  0x00000003; // byte base address, 16bit
+	*((volatile unsigned int *)0xE8000000) = tmp; // write srom bw
+
+	return dm9000_initialize(bis);
+}
+#endif /* CONFIG_DRIVER_DM9000 */
 
 #ifdef CONFIG_USB_GADGET
 static int s5pc1xx_phy_control(int on)
