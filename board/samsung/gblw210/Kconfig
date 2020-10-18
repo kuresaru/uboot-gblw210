@@ -1,0 +1,15 @@
+if TARGET_GBLW210
+
+config SYS_BOARD
+	default "gblw210"
+
+config SYS_VENDOR
+	default "samsung"
+
+config SYS_SOC
+	default "s5pc1xx"
+
+config SYS_CONFIG_NAME
+	default "gblw210"
+
+endif
